@@ -1,0 +1,4 @@
+Tekonsha 90195 P3 Electronic Brake Control - http://goo.gl/JX0qfx
+D.Coral
+
+I found a use for this when the trailer is not hooked up. My car doesn't have a digital voltage gauge, but if I go into the Troubleshooting menu I can make this display a more precise voltage reading while I'm driving. The voltage reading remains on the display even if I make a quick stop somewhere. As long as I don't let it timeout for about 15 minutes with the car off, it will keep showing the battery voltage as I get back into the car. This is nice if you're on a really long trip out in the middle of nowhere and you want to keep an eye on the alternator and battery performance to make sure the car starts!

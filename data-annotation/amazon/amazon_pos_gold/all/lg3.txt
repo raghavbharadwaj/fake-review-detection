@@ -1,0 +1,10 @@
+LG 42LB5600 42-Inch TV (2014 Model)  - http://goo.gl/mUA1Sb
+Mr Samuel G Chow
+
+First off this is the 2014 version of the beloved 32LN5300 (that I also have). Out of the box you will notice a much thinner bezel all around, and a sleek stand. I am using this side by side with the 2013 model (32LN5200) and it look is a much cleaner look than it's older brother.
+
+Important notes - You have to set the ATI scaling to 0 on the PC (at least for my system) and on the tv you have to set the input to PC! That last part was night and day, I had forgotten about this small fact and was tinkering with the EDID - Refresh (You name it) until I randomly compared the monitors side by side. Granted it was close but after labeling my input, text were nice and sharp.
+
+If you're looking for a larger monitor then I definitely would recommend this.
+
+Use - I am using this as a PC monitor and moderate to light gaming
