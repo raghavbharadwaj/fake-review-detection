@@ -4,3 +4,5 @@
   561  cat b.wfreq | ./wfreq2vocab -top 65000 -records 10000000 > b.vocab
   562  cat decmt.txt | ./text2idngram -vocab b.vocab -temp ./tmp/ -buffer 200 -fof_size 20 > b.id3gram.bin
   563  ./idngram2lm -calc_mem -idngram b.id3gram.bin -vocab b.vocab -binary b.binlm -bin_input -n 3
+
+usage: sh get_model.sh <training_file> <model_prefix>
