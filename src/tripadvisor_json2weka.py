@@ -20,8 +20,8 @@ rating_class = {
         '3': 'neutral',
         '4': 'positive',
         '5': 'positive', }
-dataset_dir = "datasets/tripadvisor_json/"
-output_dir = "datasets/tripadvisor_weka/"
+dataset_dir = "../../datasets/tripadvisor_json/"
+output_dir = "../../datasets/tripadvisor_weka/"
 for fn in sorted(glob.glob(dataset_dir + '*.json')):
     base_fn = basename(fn)
     hotel_id = splitext(base_fn)[0]
@@ -34,13 +34,16 @@ for fn in sorted(glob.glob(dataset_dir + '*.json')):
                 hotel['HotelInfo']['Address'])
         if (m):
             city = m.group(1)
+            city = re.sub(" ", "_", city)
         m = re.search('<span property="v:region">(.*?)</span>', \
                 hotel['HotelInfo']['Address'])
         if (m):
             state = m.group(1)
+            state = re.sub(" ", "_", city)
     f = open(output_dir + hotel_id + '.txt', 'w', encoding="utf-8")
     for review in hotel['Reviews']:
         author_id = review['Author']
+        author_id = re.sub(" ", "_", author_id)
         if author_id == 'A TripAdvisor Member':
             continue
         review_class = \
