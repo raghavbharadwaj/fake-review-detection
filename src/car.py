@@ -42,21 +42,46 @@ for fn in glob('../../datasets/tripadvisor_weka/*.txt'):
         calc_data['author'][author_id]['total'] += 1
         calc_data['total'] += 1
 
-print("Prior probabilities...")
+print("Calculating prior probabilities...")
 print('total', calc_data['total'])
 for rclass, class_data in calc_data['classes'].items():
     class_data['pr'] = class_data['total']/calc_data['total']
     print(rclass, class_data['total'], class_data['pr'])
 
-print("Calculating unexpectedness...")
-cu = {}
+print("Calculating one-condition rule unexpectedness...")
+total_pr_vja = 0
 for author_id, author_data in calc_data['author'].items():
-    if author_data['total'] < 3:
-        continue
+    total_pr_vja += author_data['total']/calc_data['total']
     for c, cdata in author_data['classes'].items():
-        pr_ci_vjk = cdata['total']/author_data['total']
+        confidence = cdata['total']/author_data['total']
+                # (1) confidence = Pr(c_i|v_jk)
+                # (2) expected confidence = E(Pr(c_i|v_jk)) = Pr(C_i)
+                # confidence unexpectedness = ((1) - (2))/(2)
         pr_ci = calc_data['classes'][c]['pr']
-        cdata['pr_ci_vjk'] = pr_ci_vjk
-        cu[author_id] = (pr_ci_vjk - pr_ci)/pr_ci
+        cdata['confidence'] = confidence
+        cdata['cu'] = (confidence - pr_ci)/pr_ci
 
+print('Expected support')
+for rclass, class_data in calc_data['classes'].items():
+    e_pr_vjk_ci = class_data['pr'] * total_pr_vja/len(calc_data['author'])
+    print(rclass, e_pr_vjk_ci)
 
+total_above_support_threshold = 0
+total_positive_only = 0
+total_negative_only = 0
+
+for author_id, author_data in calc_data['author'].items():
+    if author_data['total'] >= 3:
+        total_above_support_threshold += 1
+        if author_data['classes']['positive']['confidence'] == 1.0:
+            total_positive_only += 1
+        if author_data['classes']['negative']['confidence'] == 1.0:
+            total_negative_only += 1
+print('Total reviewers above support threshold:', 
+        total_above_support_threshold)
+print('Total reviewers with positive only reviews:', total_positive_only)
+print('Total reviewers with negative only reviews:', total_negative_only)
+#for author_id, author_data in \
+#        sorted(calc_data['author'].items(), reverse=True,
+#        key=lambda author: (author[1]['classes']['positive']['confidence'],
+#            author[1]['classes']['positive']['total'])):

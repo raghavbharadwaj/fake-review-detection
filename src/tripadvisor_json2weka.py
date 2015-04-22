@@ -22,6 +22,9 @@ rating_class = {
         '5': 'positive', }
 dataset_dir = "../../datasets/tripadvisor_json/"
 output_dir = "../../datasets/tripadvisor_weka/"
+
+dupflag = {}
+
 for fn in sorted(glob.glob(dataset_dir + '*.json')):
     base_fn = basename(fn)
     hotel_id = splitext(base_fn)[0]
@@ -44,6 +47,14 @@ for fn in sorted(glob.glob(dataset_dir + '*.json')):
     for review in hotel['Reviews']:
         author_id = review['Author']
         author_id = re.sub(" ", "_", author_id)
+        # Detect duplicate hotel/review
+        if 'HotelURL' not in hotel['HotelInfo']:
+            continue
+        dupkey = hotel['HotelInfo']['HotelURL']+'_'+author_id
+        if dupkey in dupflag:
+            continue
+        else:
+            dupflag[dupkey] = 1
         if author_id == 'A TripAdvisor Member':
             continue
         review_class = \
