@@ -1,8 +1,10 @@
 import nltk
 import string
 import os
-
+import sklearn
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics.pairwise import linear_kernel
 from nltk.stem.porter import PorterStemmer
 import numpy
 import math
@@ -43,15 +45,17 @@ for eachfile in sorted(os.listdir(path)):
 		eachopen1 = open (path+'/'+eachfile1,'r')
 		str2 = str(eachopen1.read())
 		v = []
+		temp_u = u
 		response2 = tfidf.transform([str2])
 		for col in response2.nonzero()[1]:
 			v.append(response2[0, col])
 		if len(u) < len(v):
 			v = v[:len(u)]
 		if len(v) < len(u):
-			u = u[:len(v)]
-		dist = numpy.dot(u,v)
+			temp_u = u[:len(v)]
+		dist = numpy.dot(temp_u,v)
 		childname = str(eachopen1).split(',')[0].split('/')[-1].split('\'')[0]
 		print(parentname+':'+childname+':'+str(dist))
 		eachopen1.close()
-	quit()
+	eachopen.close()
+
