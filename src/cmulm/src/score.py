@@ -8,10 +8,17 @@
 #test/decep50.txt  205.82  136.89
 
 total = 0
-total_decep = 0
-total_truth = 0
-decep_right = 0
-truth_right = 0
+total_decep = 0 # count_belongs_in deceptive
+total_truth = 0 # count_belongs_in truthful
+decep_right = 0 # correctly classified as deceptive
+truth_right = 0 # correctly classified as truthful
+precision_truth = 0
+recall_truth = 0;
+precision_decep = 0
+recall_decep = 0
+
+classified_as_truth = 0
+classified_as_decep = 0
 with open('results.txt','r') as fp:
 	for line in fp:
 		total += 1
@@ -25,17 +32,28 @@ with open('results.txt','r') as fp:
 
 			if float(avalue) > float(bvalue):
 				decep_right += 1
+				classified_as_decep += 1
 			else:
-				pass
+				classified_as_truth += 1
 		else:
 			total_truth += 1
 
 			if float(avalue) > float(bvalue):
 				truth_right += 1
+				classified_as_truth += 1
 			else:
-				pass
+				classified_as_decep += 1
 
 #####################
+
+pt = float(truth_right)/classified_as_truth
+pd = float(decep_right)/classified_as_decep
+
+rt = float(truth_right)/total_truth
+rd = float(decep_right)/total_decep
+
+f1t = float(2*pt*rt)/(pt+rt)
+f1d = float(2*pd*rd)/(pd+rd)
 
 print ('total = '+ str(total))
 print ('total deceptive = '+ str(total_decep))
@@ -45,3 +63,9 @@ print ('truth right = '+ str(truth_right))
 print ('Total rate = '+ str(float(decep_right+truth_right)/total))
 print ('Truth rate = '+ str(float(truth_right)/total_truth) )
 print ('Decep rate = '+  str(float(decep_right)/total_decep) )
+print ('Precision of truthful = ' + str(pt))
+print ('Precision of deceptive = ' + str(pd))
+print ('Recall of truthful = ' + str(rt))
+print ('Recall of deceptive = ' + str(rd))
+print ('f1 truth = ' + str(f1t))
+print ('f1 deceptive = ' + str(f1d))
