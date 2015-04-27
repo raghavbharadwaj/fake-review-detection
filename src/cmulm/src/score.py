@@ -38,7 +38,7 @@ with open('results.txt','r') as fp:
 		else:
 			total_truth += 1
 
-			if float(avalue) > float(bvalue):
+			if float(avalue) < float(bvalue):
 				truth_right += 1
 				classified_as_truth += 1
 			else:
