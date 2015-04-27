@@ -1,0 +1,16 @@
+amazon_all.txt:amazon_all.txt:1.0
+amazon_all.txt:doctor_all.txt:0.53357414899
+amazon_all.txt:hotels.txt:0.875567760482
+amazon_all.txt:restaurants_all.txt:0.888648726049
+doctor_all.txt:amazon_all.txt:0.53357414899
+doctor_all.txt:doctor_all.txt:1.0
+doctor_all.txt:hotels.txt:0.560204383476
+doctor_all.txt:restaurants_all.txt:0.576512119496
+hotels.txt:amazon_all.txt:0.875567760482
+hotels.txt:doctor_all.txt:0.560204383476
+hotels.txt:hotels.txt:1.0
+hotels.txt:restaurants_all.txt:0.958982074998
+restaurants_all.txt:amazon_all.txt:0.888648726049
+restaurants_all.txt:doctor_all.txt:0.576512119496
+restaurants_all.txt:hotels.txt:0.958982074998
+restaurants_all.txt:restaurants_all.txt:1.0
